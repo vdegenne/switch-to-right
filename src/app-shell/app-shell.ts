@@ -2,7 +2,7 @@ import type {MdSwitch} from '@material/web/switch/switch.js';
 import {withController} from '@snar/lit';
 import {html, LitElement} from 'lit';
 import {withStyles} from 'lit-with-styles';
-import {customElement} from 'lit/decorators.js';
+import {customElement, query} from 'lit/decorators.js';
 import {live} from 'lit/directives/live.js';
 import {materialShellLoadingOff} from 'material-shell';
 import {store} from '../store.js';
@@ -21,8 +21,13 @@ declare global {
 @withStyles(styles)
 @withController(store)
 export class AppShell extends LitElement {
+	@query('md-switch') switch: MdSwitch;
 	firstUpdated() {
 		materialShellLoadingOff.call(this);
+	}
+
+	updated() {
+		this.switch.focus();
 	}
 
 	render() {
@@ -33,15 +38,7 @@ export class AppShell extends LitElement {
 			>
 				<md-switch
 					?selected=${live(store.activated)}
-					inert
-					@change=${(event: Event) => {
-						const switchie = event.target as MdSwitch;
-						if (switchie.selected) {
-							store.activated = true;
-						} else {
-							store.activated = false;
-						}
-					}}
+					@click=${(event: PointerEvent) => event.preventDefault()}
 				></md-switch>
 				<span>Switch to right on focus</span>
 			</div>
