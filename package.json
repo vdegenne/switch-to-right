@@ -30,7 +30,6 @@
     "toastit": "^1.0.1",
     "vite": "^5.4.11",
     "vite-plugin-mdicon2svg": "^0.0.4",
-    "vite-plugin-singlefile": "^2.0.3",
     "wireit": "^0.14.9"
   },
   "scripts": {
