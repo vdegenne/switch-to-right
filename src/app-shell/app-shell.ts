@@ -37,6 +37,7 @@ export class AppShell extends LitElement {
 				@click=${() => store.toggleActive()}
 			>
 				<md-switch
+					icons
 					?selected=${live(store.activated)}
 					@click=${(event: PointerEvent) => event.preventDefault()}
 				></md-switch>
