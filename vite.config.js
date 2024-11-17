@@ -95,10 +95,11 @@ export default defineConfig({
 		// preserveSymlinks: true,
 	},
 	server: {
+		port: 5176,
 		// proxy: {'/api': 'http://localhost:23058'},
 	},
 	build: {
-		outDir: 'docs',
+		// outDir: 'docs',
 		// emptyOutDir: false,
 		// assetsInlineLimit: 6000,
 		// rollupOptions: {
