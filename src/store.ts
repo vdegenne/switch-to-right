@@ -3,6 +3,11 @@ import {type PropertyValues} from 'lit';
 import {sleep} from './utils.js';
 // import {saveToLocalStorage} from 'snar-save-to-local-storage';
 
+window.addEventListener('deactivate-switch-to-right', () => {
+	console.log('it works');
+	store.activated = false;
+});
+
 async function focusCallback() {
 	await sleep(500);
 	if (!store.activated) {
