@@ -33,7 +33,7 @@ export class AppShell extends LitElement {
 	render() {
 		return html`<!-- -->
 			<div
-				class="flex items-center gap-3 cursor-pointer select-none"
+				class="flex items-center justify-center gap-3 cursor-pointer select-none absolute inset-0"
 				@click=${() => store.toggleActive()}
 			>
 				<md-switch
