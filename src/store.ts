@@ -1,7 +1,8 @@
 import {ReactiveController, state} from '@snar/lit';
 import {type PropertyValues} from 'lit';
-import {sleep} from './utils.js';
 import {saveToLocalStorage} from 'snar-save-to-local-storage';
+import {app} from './app-shell/app-shell.js';
+import {sleep} from './utils.js';
 
 window.addEventListener('activate-switch-to-right', () => {
 	store.activated = true;
@@ -14,6 +15,7 @@ window.addEventListener('toggle-switch-to-right', () => {
 });
 
 async function focusCallback() {
+	app.mainSwitch.focus();
 	if (!store.activated && store.autoActivateOnFocus) {
 		store.toggleActivated();
 	}
