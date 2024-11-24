@@ -20,7 +20,7 @@ async function focusCallback() {
 		store.toggleActivated();
 	}
 	await sleep(500);
-	if (!store.activated) {
+	if (!store.activated || !document.hasFocus()) {
 		return;
 	}
 	fetch('http://localhost:8005/switch_to_right_workspace');
