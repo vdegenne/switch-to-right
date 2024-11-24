@@ -9,6 +9,9 @@ window.addEventListener('activate-switch-to-right', () => {
 window.addEventListener('deactivate-switch-to-right', () => {
 	store.activated = false;
 });
+window.addEventListener('toggle-switch-to-right', () => {
+	store.toggleActive();
+});
 
 async function focusCallback() {
 	await sleep(500);
