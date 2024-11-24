@@ -21,27 +21,43 @@ declare global {
 @withStyles(styles)
 @withController(store)
 export class AppShell extends LitElement {
-	@query('md-switch') switch: MdSwitch;
+	@query('md-switch') mainSwitch: MdSwitch;
 	firstUpdated() {
 		materialShellLoadingOff.call(this);
 	}
 
 	updated() {
-		this.switch.focus();
+		this.mainSwitch.focus();
 	}
 
 	render() {
 		return html`<!-- -->
 			<div
-				class="flex items-center justify-center gap-3 cursor-pointer select-none absolute inset-0"
-				@click=${() => store.toggleActive()}
+				class="absolute inset-0 flex flex-col items-center justify-center gap-3 select-none"
 			>
-				<md-switch
-					icons
-					?selected=${live(store.activated)}
-					@click=${(event: PointerEvent) => event.preventDefault()}
-				></md-switch>
-				<span>Switch to right on focus</span>
+				<div
+					class="flex items-center gap-3 cursor-pointer"
+					@click=${() => store.toggleActivated()}
+				>
+					<md-switch
+						icons
+						?selected=${live(store.activated)}
+						@click=${(event: PointerEvent) => event.preventDefault()}
+					></md-switch>
+					<span>Switch to right on focus</span>
+				</div>
+
+				<div
+					class="flex items-center gap-3 cursor-pointer"
+					@click=${() => store.toggleAutoActivateOnFocus()}
+				>
+					<md-switch
+						icons
+						?selected=${live(store.autoActivateOnFocus)}
+						@click=${(event: PointerEvent) => event.preventDefault()}
+					></md-switch>
+					<span>Auto activate on focus</span>
+				</div>
 			</div>
 			<!-- -->`;
 	}

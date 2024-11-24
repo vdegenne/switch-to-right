@@ -1,7 +1,7 @@
 import {ReactiveController, state} from '@snar/lit';
 import {type PropertyValues} from 'lit';
 import {sleep} from './utils.js';
-// import {saveToLocalStorage} from 'snar-save-to-local-storage';
+import {saveToLocalStorage} from 'snar-save-to-local-storage';
 
 window.addEventListener('activate-switch-to-right', () => {
 	store.activated = true;
@@ -10,10 +10,13 @@ window.addEventListener('deactivate-switch-to-right', () => {
 	store.activated = false;
 });
 window.addEventListener('toggle-switch-to-right', () => {
-	store.toggleActive();
+	store.toggleActivated();
 });
 
 async function focusCallback() {
+	if (!store.activated && store.autoActivateOnFocus) {
+		store.toggleActivated();
+	}
 	await sleep(500);
 	if (!store.activated) {
 		return;
@@ -21,23 +24,31 @@ async function focusCallback() {
 	fetch('http://localhost:8005/switch_to_right_workspace');
 }
 
-// @saveToLocalStorage('switch-to-right')
+@saveToLocalStorage('switch-to-right')
 export class AppStore extends ReactiveController {
 	@state() activated = false;
+	@state() autoActivateOnFocus = false;
+
+	firstUpdated() {
+		this.activated = false;
+		window.addEventListener('focus', focusCallback);
+	}
 
 	updated(changed: PropertyValues<this>) {
 		if (changed.has('activated')) {
 			if (this.activated) {
-				window.addEventListener('focus', focusCallback);
 				focusCallback();
 			} else {
-				window.removeEventListener('focus', focusCallback);
+				// window.removeEventListener('focus', focusCallback);
 			}
 		}
 	}
 
-	toggleActive() {
+	toggleActivated() {
 		this.activated = !this.activated;
+	}
+	toggleAutoActivateOnFocus() {
+		this.autoActivateOnFocus = !this.autoActivateOnFocus;
 	}
 }
 
