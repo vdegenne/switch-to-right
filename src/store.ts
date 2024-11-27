@@ -19,7 +19,7 @@ async function focusCallback() {
 	if (!store.activated && store.autoActivateOnFocus) {
 		store.toggleActivated();
 	}
-	await sleep(500);
+	await sleep(600);
 	if (!store.activated || !document.hasFocus()) {
 		return;
 	}
