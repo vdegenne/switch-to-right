@@ -14,6 +14,10 @@ window.addEventListener('toggle-switch-to-right', () => {
 	store.toggleActivated();
 });
 
+export function callback() {
+	fetch('http://localhost:8005/switch_to_right_workspace');
+}
+
 async function focusCallback() {
 	app.mainSwitch.focus();
 	if (!store.activated && store.autoActivateOnFocus) {
@@ -24,6 +28,7 @@ async function focusCallback() {
 		return;
 	}
 	fetch('http://localhost:8005/switch_to_right_workspace');
+	callback();
 }
 
 @saveToLocalStorage('switch-to-right')
