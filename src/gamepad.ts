@@ -1,5 +1,5 @@
 import gameControl, {XBoxButton} from 'esm-gamecontroller.js';
-import {store} from './store.js';
+import {callback, store} from './store.js';
 
 gameControl.on('connect', (gamepad) => {
 	let leftTriggerOn = false;
@@ -17,5 +17,9 @@ gameControl.on('connect', (gamepad) => {
 				store.toggleAutoActivateOnFocus();
 			}
 		}
+	});
+	gamepad.before(XBoxButton.Y, () => {
+		store.activated = true;
+		callback();
 	});
 });
