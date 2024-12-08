@@ -25,10 +25,10 @@ gameControl.on('connect', (gamepad) => {
 			}
 		}
 	});
-	gamepad.before(XBoxButton.Y, () => {
-		if (!leftTriggerOn && !rightTriggerOn) {
-			store.activated = true;
-			callback();
-		}
+	gamepad.after(XBoxButton.Y, () => {
+		// if (!leftTriggerOn && !rightTriggerOn) {
+		store.activated = true;
+		callback();
+		// }
 	});
 });
