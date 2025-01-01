@@ -33,6 +33,7 @@ export class AppShell extends LitElement {
 	render() {
 		return html`<!-- -->
 			<div
+				id="wrapper"
 				class="absolute inset-0 flex flex-col items-center justify-center gap-3 select-none"
 			>
 				<div
