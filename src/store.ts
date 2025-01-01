@@ -37,7 +37,7 @@ function tryToSleep(timeMs = 1000, checkMs = 50): Promise<void> {
 
 let n = 0;
 async function focusCallback() {
-	toast(++n);
+	// toast(++n);
 	app.mainSwitch.focus();
 	if (!store.activated && store.autoActivateOnFocus) {
 		store.activated = true;
