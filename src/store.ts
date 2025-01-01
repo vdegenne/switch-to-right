@@ -3,6 +3,7 @@ import {type PropertyValues} from 'lit';
 import {saveToLocalStorage} from 'snar-save-to-local-storage';
 import {app} from './app-shell/app-shell.js';
 import {sleep} from './utils.js';
+import {toast} from 'toastit';
 
 window.addEventListener('activate-switch-to-right', () => {
 	store.activated = true;
@@ -18,13 +19,35 @@ export function callback() {
 	fetch('http://localhost:8005/switch_to_right_workspace');
 }
 
+/**
+ * Sleep but will reject if the page lost focus.
+ */
+function tryToSleep(timeMs = 1000, checkMs = 50): Promise<void> {
+	return new Promise(async (resolve, reject) => {
+		for (let i = 0; i <= timeMs; i += checkMs) {
+			if (!store.activated || !document.hasFocus()) {
+				reject();
+				return;
+			}
+			await sleep(checkMs);
+		}
+		resolve();
+	});
+}
+
+let n = 0;
 async function focusCallback() {
+	toast(++n);
 	app.mainSwitch.focus();
 	if (!store.activated && store.autoActivateOnFocus) {
-		store.toggleActivated();
+		store.activated = true;
+		return;
 	}
-	await sleep(900);
-	if (!store.activated || !document.hasFocus()) {
+	try {
+		// ✟ await sleep(900);
+		await tryToSleep(900);
+	} catch {
+		// app lost focus, ignore...
 		return;
 	}
 	callback();

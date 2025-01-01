@@ -28,7 +28,7 @@
 		"snar": "^2.2.0",
 		"snar-save-to-local-storage": "^1.0.1",
 		"tailwindcss": "^3.4.15",
-		"toastit": "^1.0.1",
+		"toastit": "^1.1.7",
 		"vite": "^5.4.11",
 		"vite-plugin-mdicon2svg": "^0.0.4",
 		"vite-plugin-pwa": "^0.21.0",
@@ -72,4 +72,3 @@
 		}
 	}
 }
-
