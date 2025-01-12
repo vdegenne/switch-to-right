@@ -16,6 +16,11 @@ const plugins = [];
 // 	}),
 // );
 
+try {
+	const {default: basicSsl} = await import('@vitejs/plugin-basic-ssl');
+	plugins.push(basicSsl());
+} catch {}
+
 /** Material plugins */
 plugins.push(
 	materialShell({
