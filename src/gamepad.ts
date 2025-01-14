@@ -1,5 +1,23 @@
 import gameControl, {XBoxButton} from 'esm-gamecontroller.js';
 import {callback, store} from './store.js';
+import {sleep} from './utils.js';
+
+// export let gamepad_connected = false;
+let focus = false;
+async function onFocus() {
+	await sleep(100);
+	focus = true;
+}
+onFocus();
+
+window.addEventListener('focus', onFocus);
+window.addEventListener('blur', () => {
+	focus = false;
+});
+
+function shouldExecute() {
+	return document.hasFocus();
+}
 
 gameControl.on('connect', (gamepad) => {
 	let leftTriggerOn = false;
@@ -17,7 +35,7 @@ gameControl.on('connect', (gamepad) => {
 		rightTriggerOn = false;
 	});
 	gamepad.before(XBoxButton.B, () => {
-		if (document.hasFocus()) {
+		if (shouldExecute()) {
 			if (!leftTriggerOn) {
 				store.toggleActivated();
 			} else {
@@ -26,9 +44,9 @@ gameControl.on('connect', (gamepad) => {
 		}
 	});
 	gamepad.after(XBoxButton.Y, () => {
-		// if (!leftTriggerOn && !rightTriggerOn) {
-		store.activated = true;
-		callback();
-		// }
+		if (shouldExecute()) {
+			store.activated = true;
+			callback();
+		}
 	});
 });
