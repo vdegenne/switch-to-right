@@ -9,6 +9,8 @@
    * which is `--md-sys-color-surface-container` on the :root
    */
 	background-color: var(--md-sys-color-surface);
+
+	/*--spacing: 0.25rem;*/
 }
 
 body {

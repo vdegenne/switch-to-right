@@ -2,7 +2,7 @@ import {setBaseStyles} from 'lit-with-styles';
 import globals from './stylesheets/globals.css?inline';
 import sharedStyles from './stylesheets/shared.css?inline';
 
-// console.log(sharedStyles);
+console.log(sharedStyles);
 
 setBaseStyles(sharedStyles);
 

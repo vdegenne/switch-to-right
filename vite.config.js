@@ -2,11 +2,14 @@ import {defineConfig} from 'vite';
 import {materialShell} from 'material-shell/vite.js';
 import {materialAll} from 'rollup-plugin-material-all';
 import {mdicon2svg} from 'vite-plugin-mdicon2svg';
+// import tailwindcss from '@tailwindcss/vite';
 
 /**
  * @type {import('vite').Plugin[]}
  */
 const plugins = [];
+
+// plugins.push(tailwindcss());
 
 /** Dev plugins */
 // plugins.push(

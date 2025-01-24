@@ -1,6 +1,10 @@
-/* @tailwind base; */
-@tailwind utilities;
-/* @tailwind components; */
+@import 'tailwindcss';
+
+@layer theme {
+	:host {
+		--spacing: 0.25rem;
+	}
+}
 
 [hidden] {
 	display: none;
