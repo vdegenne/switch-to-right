@@ -1,4 +1,9 @@
-import gameControl, {XBoxButton} from 'esm-gamecontroller.js';
+import gameControl, {
+	getMode,
+	Modes,
+	setStateGamepad,
+	XBoxButton,
+} from 'esm-gamecontroller.js';
 import {callback, store} from './store.js';
 import {sleep} from './utils.js';
 
@@ -20,6 +25,7 @@ function shouldExecute() {
 }
 
 gameControl.on('connect', (gamepad) => {
+	setStateGamepad(gamepad);
 	let leftTriggerOn = false;
 	let rightTriggerOn = false;
 	gamepad.before(XBoxButton.LEFT_TRIGGER, () => {
@@ -44,9 +50,18 @@ gameControl.on('connect', (gamepad) => {
 		}
 	});
 	gamepad.after(XBoxButton.Y, () => {
-		if (shouldExecute()) {
-			store.activated = true;
-			callback();
+		if (!shouldExecute()) {
+			return;
+		}
+		const mode = getMode();
+		switch (mode) {
+			case Modes.NORMAL:
+				store.activated = true;
+				callback();
+				break;
+			case Modes.PRIMARY:
+				window.close();
+				break;
 		}
 	});
 });
