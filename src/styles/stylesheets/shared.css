@@ -1,9 +1,25 @@
-@import 'tailwindcss';
+@import 'tailwindcss/theme';
+@import 'tailwindcss/utilities';
 
-@layer theme {
-	:host {
-		--spacing: 0.25rem;
-	}
+@theme {
+	--animate-*: initial;
+	--aspect-*: initial;
+	--blur-*: initial;
+	--breakpoint-*: initial;
+	--color-*: initial;
+	--container-*: initial;
+	--default-*: initial;
+	--drop-*: initial;
+	--ease-*: initial;
+	--font-*: initial;
+	--font-weight-*: initial;
+	--inset-shadow-*: initial;
+	--leading-*: initial;
+	--perspective-*: initial;
+	--radius-*: initial;
+	--shadow-*: initial;
+	--text-*: initial;
+	--tracking-*: initial;
 }
 
 [hidden] {
