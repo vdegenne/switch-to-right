@@ -45,7 +45,7 @@ async function focusCallback() {
 	}
 	try {
 		// ✟ await sleep(900);
-		await tryToSleep(900);
+		await tryToSleep(1001, 40);
 	} catch {
 		// app lost focus, ignore...
 		return;
