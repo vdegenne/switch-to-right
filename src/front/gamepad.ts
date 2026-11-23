@@ -21,6 +21,7 @@
 // 	})
 // })
 
+import { toast } from './snackbar.js'
 import { store } from './store.js'
 import { switchToRight } from './switcher.js'
 import { getDeepActiveElement } from './utils.js'
@@ -85,6 +86,7 @@ const stopListening = listenForGamepadButtons(
 	function () {
 		// Y
 		store.switchOnFocus = true
+		toast({ message: 'will switch', timeoutMs: 500 })
 		switchToRight()
 	},
 	function (leftTrigger) {

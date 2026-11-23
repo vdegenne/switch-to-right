@@ -1,5 +1,4 @@
 import { ydotool } from '@vdegenne/py-server'
-import { toast } from './snackbar.js'
 import { store } from './store.js'
 
 export function switchToRight() {
@@ -11,7 +10,7 @@ let timer: ReturnType<typeof setTimeout> | undefined
 export function switchToRightDebounce(): void {
 	cancelSwitch()
 
-	toast({ message: 'will switch', timeoutMs: 500 })
+	// toast({ message: 'will switch', timeoutMs: 500 })
 
 	timer = setTimeout(() => {
 		timer = undefined
