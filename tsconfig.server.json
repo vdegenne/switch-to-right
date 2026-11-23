@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"composite": true,
+		"target": "esnext",
+		"module": "nodenext",
+		"moduleResolution": "nodenext",
+		"strict": true,
+		"outDir": "./lib/",
+		"rootDir": "./src/",
+		"types": ["node"]
+	},
+	"include": [
+		"./src/server/**/*.ts",
+		"./src/shared/**/*.ts",
+		"./types/shared.d.ts"
+	]
+}
