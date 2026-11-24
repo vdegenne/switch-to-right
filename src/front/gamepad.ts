@@ -31,12 +31,9 @@ export function listenForGamepadButtons(
 	onBPress: (leftTrigger: boolean) => void,
 ): () => void {
 	const previousStates = new Map<number, { y: boolean; b: boolean }>()
-	let animationFrame = 0
-	let running = true
+	let interval: ReturnType<typeof setInterval>
 
 	function poll(): void {
-		if (!running) return
-
 		const gamepads = navigator.getGamepads()
 
 		for (const gamepad of gamepads) {
@@ -54,15 +51,13 @@ export function listenForGamepadButtons(
 
 			previousStates.set(gamepad.index, { y, b })
 		}
-
-		animationFrame = requestAnimationFrame(poll)
 	}
 
 	poll()
+	interval = setInterval(poll, 8)
 
 	return function dispose(): void {
-		running = false
-		cancelAnimationFrame(animationFrame)
+		clearInterval(interval)
 		previousStates.clear()
 	}
 }
