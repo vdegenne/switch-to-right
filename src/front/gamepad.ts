@@ -32,7 +32,7 @@ export function listenForGamepadButtons(
 ): () => void {
 	const previousStates = new Map<number, { y: boolean; b: boolean }>()
 	let animationFrame = 0
-	let running = false
+	let running = true
 
 	function poll(): void {
 		if (!running) return
@@ -58,26 +58,11 @@ export function listenForGamepadButtons(
 		animationFrame = requestAnimationFrame(poll)
 	}
 
-	function start(): void {
-		if (running) return
-		running = true
-		poll()
-	}
-
-	function stop(): void {
-		running = false
-		cancelAnimationFrame(animationFrame)
-	}
-
-	window.addEventListener('focus', start)
-	window.addEventListener('blur', stop)
-
-	if (document.hasFocus()) start()
+	poll()
 
 	return function dispose(): void {
-		stop()
-		window.removeEventListener('focus', start)
-		window.removeEventListener('blur', stop)
+		running = false
+		cancelAnimationFrame(animationFrame)
 		previousStates.clear()
 	}
 }
